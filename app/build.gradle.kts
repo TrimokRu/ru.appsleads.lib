@@ -5,6 +5,8 @@ plugins {
 }
 
 android {
+    group = "ru.appsleads.lib"
+    version = "1.0"
     namespace = "ru.appsleads.lib"
     compileSdk = 33
 
@@ -43,6 +45,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -64,4 +73,18 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation(files("../libs/af-android-sdk-6.12.2.aar"))
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.TrimokRu"
+            artifactId = "ru.appsleads.lib"
+            version = "0.0.1"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }
