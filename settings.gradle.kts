@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Appleads"
 include(":app")
-include(":mylibrary")
