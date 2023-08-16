@@ -72,8 +72,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation(files("../libs/af-android-sdk-6.12.2.aar"))
-    implementation(fileTree("libs", {"*.jar"}))
+    implementation("com.appsflyer:af-android-sdk:6.12.2")
 }
 
 publishing {
