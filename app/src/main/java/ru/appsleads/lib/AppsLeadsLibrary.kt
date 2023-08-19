@@ -19,7 +19,7 @@ import com.appsflyer.AppsFlyerLib
 private val AID = "AID"
 private val CAMPAIGN = "campaign"
 
-class AppsLeadsLibrary(private val context: Context, private val appsFlayerKey: String):
+class AppsLeadsLibrary(private val context: Context, private val appsFlayerKey: String) :
     IAppsLeadsLibrary {
 
     override fun init(
@@ -29,14 +29,17 @@ class AppsLeadsLibrary(private val context: Context, private val appsFlayerKey: 
         onAttributionFailure: () -> Unit
     ) {
         AppsFlyerLib.getInstance().init(appsFlayerKey, object : AppsFlyerConversionListener {
-            override fun onConversionDataSuccess(conversinon: MutableMap<String, Any>?)= onConversionDataSuccess(getCampaignStringFromMutableMap(conversinon))
+            override fun onConversionDataSuccess(conversinon: MutableMap<String, Any>?) =
+                onConversionDataSuccess(getCampaignStringFromMutableMap(conversinon))
 
             override fun onConversionDataFail(p0: String?) = onConversionDataFail()
 
-            override fun onAppOpenAttribution(p0: MutableMap<String, String>?) = onAppOpenAttribution()
+            override fun onAppOpenAttribution(p0: MutableMap<String, String>?) =
+                onAppOpenAttribution()
 
             override fun onAttributionFailure(p0: String?) = onAttributionFailure()
         }, context)
+            .start(context)
     }
 
     override fun getCampaignStringFromMutableMap(mutableMap: MutableMap<String, Any>?): String? {
